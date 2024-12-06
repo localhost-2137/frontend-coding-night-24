@@ -2,7 +2,7 @@ import Wrapper from "@/Layout/Wrapper";
 import Background from "../Assets/background.png";
 import Chat from "@/Layout/Chat";
 import Mars from "../Assets/mars.jpg";
-import MapWrapper from "@/components/map/mapWrapper.tsx";
+import MapWrapper from "@/components/map/marsMap.tsx";
 import BaseData from "@/Layout/BaseData";
 
 export default function Dashboard(): JSX.Element {
