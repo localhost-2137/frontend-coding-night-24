@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function MainPage(): JSX.Element {
   const acronymLetters = ["S.", "R.", "A.", "M."];
-  const wordList = ["System", "Rozdziału i", "Alokacji", "Materiałów"];
+  const wordList = ["Space", "Research", "Around", "Mars"];
 
   return (
     <div
