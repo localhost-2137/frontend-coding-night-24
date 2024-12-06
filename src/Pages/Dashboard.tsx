@@ -1,0 +1,33 @@
+import Wrapper from "@/Layout/Wrapper";
+import Background from "../Assets/background.png";
+import Chat from "@/Layout/Chat";
+import Mars from "../Assets/mars.jpg";
+
+export default function Dashboard(): JSX.Element {
+  return (
+    <div
+      className="w-screen h-screen flex items-center overflow-hidden justify-center"
+      style={{ background: `url(${Background})` }}
+    >
+      <img
+        src={Mars}
+        alt="Mars"
+        className="right-0 fixed w-1/2 top-0 ml-32"
+      />
+      <div className="w-2/3 h-4/5 grid grid-cols-6 grid-rows-10 z-30 gap-4">
+        <Wrapper className="col-span-4 row-span-6">
+          <h1>Mapa</h1>
+        </Wrapper>
+        <Wrapper className="col-span-2 row-span-10">
+          <Chat />
+        </Wrapper>
+        <Wrapper className="col-span-2 row-span-4">
+          <h1>Jakieś dane</h1>
+        </Wrapper>
+        <Wrapper className="col-span-2 row-span-4">
+          <h1>Jakieś dane</h1>
+        </Wrapper>
+      </div>
+    </div>
+  );
+}

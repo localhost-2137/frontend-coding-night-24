@@ -1,6 +1,7 @@
 import Mars from "../Assets/mars.jpg";
 import Background from "../Assets/background.png";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function MainPage(): JSX.Element {
   const acronymLetters = ["S.", "R.", "A.", "M."];
@@ -8,7 +9,7 @@ export default function MainPage(): JSX.Element {
 
   return (
     <div
-      className="w-screen h-screen overflow-y-hidden flex items-center px-32 gap-8"
+      className="w-screen h-screen overflow-hidden flex items-center px-32 gap-8"
       style={{ background: `url(${Background})` }}
     >
       <div className="flex flex-col justify-center text-8xl font-poppins font-bold gap-16 text-white">
@@ -44,8 +45,9 @@ export default function MainPage(): JSX.Element {
           style={{
             animationDelay: `4s`,
           }}
+          asChild
         >
-          Przejdź do aplikacji
+          <Link to="/dashboard">Przejdź do aplikacji</Link>
         </Button>
       </div>
       <img

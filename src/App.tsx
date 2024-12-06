@@ -2,6 +2,7 @@ import { useLocation, useRoutes } from "react-router-dom";
 import Header from "./Layout/Header";
 import { cloneElement } from "react";
 import MainPage from "./Pages/Main";
+import Dashboard from "./Pages/Dashboard";
 
 export default function App(): JSX.Element | null {
   const element = useRoutes([
@@ -12,7 +13,11 @@ export default function App(): JSX.Element | null {
         {
           path: "/",
           element: <MainPage />,
-        }
+        },
+        {
+          path: "/dashboard",
+          element: <Dashboard />,
+        },
       ],
     },
   ]);
