@@ -2,6 +2,7 @@ import Wrapper from "@/Layout/Wrapper";
 import Background from "../Assets/background.png";
 import Chat from "@/Layout/Chat";
 import Mars from "../Assets/mars.jpg";
+import MapWrapper from "@/components/map/mapWrapper.tsx";
 
 export default function Dashboard(): JSX.Element {
   return (
@@ -15,8 +16,8 @@ export default function Dashboard(): JSX.Element {
         className="right-0 fixed w-1/2 top-0 ml-32"
       />
       <div className="w-2/3 h-4/5 grid grid-cols-6 grid-rows-10 z-30 gap-4">
-        <Wrapper className="col-span-4 row-span-6">
-          <h1>Mapa</h1>
+        <Wrapper className="col-span-4 row-span-6 overflow-hidden">
+          <MapWrapper/>
         </Wrapper>
         <Wrapper className="col-span-2 row-span-10">
           <Chat />
