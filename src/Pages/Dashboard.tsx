@@ -9,6 +9,7 @@ import {baseDataAtom, chatMessagesAtom} from "@/atoms";
 import {useEffect} from "react";
 import {alertAtom} from "@/atoms/alertAtom.ts";
 import {useRef} from "react";
+import MarsStats from "@/Layout/MarsStats";
 
 export default function Dashboard(): JSX.Element {
     const setBaseData = useSetAtom(baseDataAtom);
@@ -106,7 +107,7 @@ export default function Dashboard(): JSX.Element {
                     <BaseData/>
                 </Wrapper>
                 <Wrapper className="col-span-2 row-span-4" animation={true} delay={0.4}>
-                    <h1>Jakieś dane</h1>
+                    <MarsStats />
                 </Wrapper>
             </div>
         </div>
