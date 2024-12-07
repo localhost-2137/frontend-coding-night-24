@@ -32,7 +32,6 @@ export default function Reports() {
                 <hr/>
                 <div className="py-2 flex flex-col gap-4">
                     {status === "pending" && <div>Ładowanie...</div>}
-                    {status === "error" && <div>Nie znaleziono raportów</div>}
                     {status === "success" && data!.data.map((report: IReport) => {
                         return <ReportCard report={report} key={report.id}/>
                     })}
