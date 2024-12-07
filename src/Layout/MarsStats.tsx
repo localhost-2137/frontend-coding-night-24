@@ -16,7 +16,6 @@ export default function MarsStats(): JSX.Element {
     );
 
   const currentData = data?.data[data?.data.length - 1];
-  console.log(currentData);
 
   return (
     <div className="flex w-full h-full flex-col items-center justify-center">

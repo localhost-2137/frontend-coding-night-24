@@ -19,11 +19,12 @@ export default function Chat({
 }): JSX.Element {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useAtom<chatMessage[]>(chatMessagesAtom);
+  const [isRecording, setIsRecording] = useState<boolean>(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   function sendMessage() {
-    sendMessageToChat(message);
     if (message.trim() === "") return;
+    sendMessageToChat(message);
     setMessages([
       ...messages,
       {
@@ -115,9 +116,14 @@ export default function Chat({
       </div>
       <div className="w-full h-fit py-2 px-4 font-poppins text-lg border-t-2 border-gray-800 flex items-center justify-between gap-2">
         <img
-          src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+          src={
+            isRecording
+              ? "https://cdn-icons-png.flaticon.com/512/709/709682.png"
+              : "https://cdn-icons-png.flaticon.com/512/1082/1082810.png"
+          }
           className="h-6 invert cursor-pointer"
-          alt="add_image"
+          onClick={() => setIsRecording(prev => !prev)}
+          alt="microphone_image"
         />
         <ChatInput
           message={message}
