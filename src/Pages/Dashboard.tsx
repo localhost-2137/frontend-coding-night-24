@@ -52,7 +52,7 @@ export default function Dashboard(): JSX.Element {
                 ]);
                 setTimeout(() => {
                     setAlert(false);
-                }, 5000);
+                }, 10000);
             }
 
             if (data.type === "text") {
@@ -95,7 +95,7 @@ export default function Dashboard(): JSX.Element {
         className="w-screen h-screen flex lg:items-center overflow-y-auto overflow-x-hidden lg:justify-center"
         style={{ background: `url(${Background})` }}
       >
-        <audio ref={audioRef} src={AlertSound} />
+        <audio ref={audioRef} src={AlertSound} loop={true} />
         <img
           src={Mars}
           alt="Mars"
