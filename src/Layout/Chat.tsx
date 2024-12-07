@@ -11,11 +11,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export default function Chat(): JSX.Element {
+export default function Chat({
+  sendMessageToChat,
+}: {
+  sendMessageToChat: (message: string) => void;
+}): JSX.Element {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useAtom<chatMessage[]>(chatMessagesAtom);
 
   function sendMessage() {
+    sendMessageToChat(message);
     if (message.trim() === "") return;
     setMessages([
       ...messages,
@@ -81,7 +86,7 @@ export default function Chat(): JSX.Element {
           ) : (
             <div
               key={message.id}
-              className={`w-full h-fit px-4 py-2 flex items-center gap-2 font-poppins break-all text-lg ${
+              className={`w-full h-fit px-4 py-2 flex items-center gap-2 font-poppins break-words text-lg ${
                 message.sender === "user" ? "text-white" : "text-gray-400"
               }`}
             >

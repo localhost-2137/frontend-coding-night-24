@@ -16,25 +16,7 @@ const chatMessagesAtom = atom<chatMessage[]>([
   },
   {
     id: 2,
-    content: "jAKIEŚ COŚ BŁĄD",
-    sender: "bot",
-    type: "alert",
-  },
-  {
-    id: 3,
-    content: "jAKIEŚ COŚ info",
-    sender: "bot",
-    type: "info",
-  },
-  {
-    id: 4,
-    content: "jAKIEŚ COŚ wiadomość",
-    sender: "user",
-    type: "message",
-  },
-  {
-    id: 5,
-    content: "jAKIEŚ COŚ odpowiedź",
+    content: "Hej, z tej strony asystent ai, w czym mogę pomóc?",
     sender: "bot",
     type: "message",
   },

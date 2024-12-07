@@ -7,28 +7,25 @@ import BaseData from "@/Layout/BaseData";
 import { useSetAtom } from "jotai";
 import { baseDataAtom, chatMessagesAtom } from "@/atoms";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 export default function Dashboard(): JSX.Element {
   const setBaseData = useSetAtom(baseDataAtom);
   const setMessages = useSetAtom(chatMessagesAtom);
   const WS_URL = "ws://10.42.0.1:3000/ws";
 
-  useEffect(() => {
-    const ws = new WebSocket(WS_URL);
+  const ws = useRef<WebSocket | null>(null);
 
-    ws.onopen = () => {
+  useEffect(() => {
+    ws.current = new WebSocket(WS_URL);
+
+    ws.current.onopen = () => {
       console.log("Connected");
-      ws.send(
-        JSON.stringify({
-          type: "ai",
-          value: "Wyślij coś",
-        })
-      );
     };
 
-    ws.onmessage = (event) => {
+    ws.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      
+
       if (data.type === "base_data") {
         setBaseData({
           currentPeopleInBase: data.value.inside,
@@ -48,6 +45,7 @@ export default function Dashboard(): JSX.Element {
           },
         ]);
       }
+
       if (data.type === "text") {
         setMessages((prev) => [
           ...prev,
@@ -61,8 +59,21 @@ export default function Dashboard(): JSX.Element {
       }
     };
 
-    return () => ws.close();
+    return () => {
+      ws.current?.close();
+    };
   }, []);
+
+  function sendMessage(message: string) {
+    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+      ws.current.send(JSON.stringify({ type: "text", value: message }));
+    } else {
+      console.error(
+        "WebSocket is not open. Ready state:",
+        ws.current?.readyState
+      );
+    }
+  }
 
   return (
     <div
@@ -83,7 +94,7 @@ export default function Dashboard(): JSX.Element {
           animation={true}
           delay={0.3}
         >
-          <Chat />
+          <Chat sendMessageToChat={sendMessage} />
         </Wrapper>
         <Wrapper className="col-span-2 row-span-4" animation={true} delay={0.4}>
           <BaseData />
