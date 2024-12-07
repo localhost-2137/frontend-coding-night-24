@@ -3,6 +3,7 @@ import Header from "./Layout/Header";
 import {cloneElement} from "react";
 import MainPage from "./Pages/Main";
 import Dashboard from "./Pages/Dashboard";
+import Storage from "./Pages/Storage";
 import {
     QueryClient, QueryClientProvider,
 } from '@tanstack/react-query'
@@ -27,6 +28,9 @@ export default function App(): JSX.Element | null {
                 {
                     path: "/reports",
                     element: <Reports/>
+                }, {
+                    path: "/storage",
+                    element: <Storage/>
                 }
             ],
         },
