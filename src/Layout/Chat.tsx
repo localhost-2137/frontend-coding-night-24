@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useRef } from "react";
 
 export default function Chat({
   sendMessageToChat,
@@ -18,6 +19,7 @@ export default function Chat({
 }): JSX.Element {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useAtom<chatMessage[]>(chatMessagesAtom);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   function sendMessage() {
     sendMessageToChat(message);
@@ -33,6 +35,13 @@ export default function Chat({
     ]);
     setMessage("");
   }
+
+  useEffect(() => {
+    chatContainerRef.current?.scrollTo({
+      top: chatContainerRef.current?.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [messages]);
 
   return (
     <div className="flex flex-col h-full items-center justify-center">
@@ -70,7 +79,10 @@ export default function Chat({
           </DialogContent>
         </Dialog>
       </header>
-      <div className="w-full h-full flex flex-col gap-2 overflow-auto">
+      <div
+        className="w-full h-full flex flex-col gap-2 overflow-auto"
+        ref={chatContainerRef}
+      >
         {messages.map((message) =>
           message.type === "sys_info" ? (
             <div
