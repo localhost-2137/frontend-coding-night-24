@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import mars_gif from "../Assets/mars.gif";
+import { useAtomValue } from "jotai";
+import { baseDataAtom } from "@/atoms";
 
 export default function BaseData(): JSX.Element {
+  const baseData = useAtomValue(baseDataAtom);
   const [currentTime, setCurrentTime] = useState<string>("00:00");
-  const [currentO2, _setCurrentO2] = useState<number>(100);
-  const [currentPeopleInBase, _setCurrentPeopleInBase] = useState<number>(12);
-  const [currentDoorStatus, _setCurrentDoorStatus] = useState<
-    "Otwarte" | "Zamknięte"
-  >("Zamknięte");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +38,7 @@ export default function BaseData(): JSX.Element {
             className="invert h-6"
             alt=""
           />
-          <span className="text-gray-400">{currentPeopleInBase}</span>
+          <span className="text-gray-400">{baseData.currentPeopleInBase}</span>
         </p>
       </div>
       <p className="font-poppins text-2xl font-bold flex items-center gap-2">
@@ -49,7 +47,7 @@ export default function BaseData(): JSX.Element {
           className="invert h-6"
           alt=""
         />
-        <span className="text-gray-400">{currentO2}%</span>
+        <span className="text-gray-400">{baseData.currentO2}%</span>
       </p>
       <p className="font-poppins text-2xl font-bold flex items-center gap-2">
         <img
@@ -57,7 +55,7 @@ export default function BaseData(): JSX.Element {
           className="invert h-6"
           alt=""
         />
-        <span className="text-gray-400">{currentDoorStatus}</span>
+        <span className="text-gray-400">{baseData.currentDoorStatus}</span>
       </p>
       <img
         src={mars_gif}
