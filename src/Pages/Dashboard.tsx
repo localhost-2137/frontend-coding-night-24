@@ -1,5 +1,6 @@
 import Wrapper from "@/Layout/Wrapper";
 import Background from "../Assets/background.png";
+import AlertSound from "../Assets/alert.mp3";
 import Chat from "@/Layout/Chat";
 import Mars from "../Assets/mars.jpg";
 import MapWrapper from "@/components/map/marsMap.tsx";
@@ -14,7 +15,8 @@ import MarsStats from "@/Layout/MarsStats";
 export default function Dashboard(): JSX.Element {
     const setBaseData = useSetAtom(baseDataAtom);
     const setMessages = useSetAtom(chatMessagesAtom);
-    const [, setAlert] = useAtom(alertAtom)
+    const [alert, setAlert] = useAtom(alertAtom)
+    const audioRef = useRef<HTMLAudioElement>(null);
     const WS_URL = "ws://10.42.0.1:3000/ws";
 
     const ws = useRef<WebSocket | null>(null);
@@ -71,6 +73,12 @@ export default function Dashboard(): JSX.Element {
         };
     }, []);
 
+    useEffect(() => {
+        if (alert && audioRef.current) {
+            audioRef.current.play();
+        }
+    }, [alert]);
+
     function sendMessage(message: string) {
         if (ws.current && ws.current.readyState === WebSocket.OPEN) {
             ws.current.send(JSON.stringify({type: "ai", value: message}));
@@ -87,6 +95,7 @@ export default function Dashboard(): JSX.Element {
             className="w-screen h-screen flex items-center overflow-hidden justify-center"
             style={{background: `url(${Background})`}}
         >
+            <audio ref={audioRef} src={AlertSound}/>
             <img src={Mars} alt="Mars" className="right-0 fixed w-1/2 top-0 ml-32"/>
             <div className="w-2/3 h-4/5 grid grid-cols-6 grid-rows-10 z-30 gap-4">
                 <Wrapper
