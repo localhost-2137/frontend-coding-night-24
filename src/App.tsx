@@ -6,6 +6,7 @@ import Dashboard from "./Pages/Dashboard";
 import {
     QueryClient, QueryClientProvider,
 } from '@tanstack/react-query'
+import Reports from "@/Pages/Reports.tsx";
 
 export default function App(): JSX.Element | null {
     const queryClient = new QueryClient()
@@ -23,6 +24,10 @@ export default function App(): JSX.Element | null {
                     path: "/dashboard",
                     element: <Dashboard/>,
                 },
+                {
+                    path: "/reports",
+                    element: <Reports/>
+                }
             ],
         },
     ]);
