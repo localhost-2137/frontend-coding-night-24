@@ -71,7 +71,7 @@ export default function useMarsMarkers() {
     }, [status, data]);
 
     useEffect(() => {
-        if (mapPointsStatus === "success") {
+        if (mapPointsStatus === "success" && mapPoints.data.points) {
             const points: IMarker[] = mapPoints.data.points.map((point: {
                 id: number
                 label: string
