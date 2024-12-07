@@ -90,7 +90,7 @@ export default function Chat({
               key={message.id}
             >
               <div className="w-full h-1 rounded-full bg-gray-400"></div>
-              <div className="w-full font-poppins text-md text-gray-400">
+              <div className="w-full font-poppins text-md text-gray-400 text-center">
                 {message.content}
               </div>
               <div className="w-full h-1 rounded-full bg-gray-400"></div>

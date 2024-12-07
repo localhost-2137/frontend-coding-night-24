@@ -91,34 +91,60 @@ export default function Dashboard(): JSX.Element {
     }
 
     return (
-        <div
-            className="w-screen h-screen flex items-center overflow-hidden justify-center"
-            style={{background: `url(${Background})`}}
-        >
-            <audio ref={audioRef} src={AlertSound}/>
-            <img src={Mars} alt="Mars" className="right-0 fixed w-1/2 top-0 ml-32"/>
-            <div className="w-2/3 h-4/5 grid grid-cols-6 grid-rows-10 z-30 gap-4">
-                <Wrapper
-                    className="col-span-4 row-span-6 overflow-hidden"
-                    animation={true}
-                    delay={0.2}
-                >
-                    <MapWrapper/>
-                </Wrapper>
-                <Wrapper
-                    className="col-span-2 row-span-10"
-                    animation={true}
-                    delay={0.3}
-                >
-                    <Chat sendMessageToChat={sendMessage}/>
-                </Wrapper>
-                <Wrapper className="col-span-2 row-span-4" animation={true} delay={0.4}>
-                    <BaseData/>
-                </Wrapper>
-                <Wrapper className="col-span-2 row-span-4" animation={true} delay={0.4}>
-                    <MarsStats />
-                </Wrapper>
-            </div>
+      <div
+        className="w-screen h-screen flex lg:items-center overflow-y-auto overflow-x-hidden lg:justify-center"
+        style={{ background: `url(${Background})` }}
+      >
+        <audio ref={audioRef} src={AlertSound} />
+        <img
+          src={Mars}
+          alt="Mars"
+          className="right-0 fixed w-1/2 top-0 ml-32"
+        />
+        <div className="2xl:w-2/3 xl:w-4/5 w-full mx-4 lg:h-4/5 lg:grid hidden grid-cols-6 lg:grid-rows-10 grid-rows-12 z-30 gap-4 py-3">
+          <Wrapper
+            className="col-span-4 lg:row-span-6 overflow-hidden"
+            animation={true}
+            delay={0.2}
+          >
+            <MapWrapper />
+          </Wrapper>
+          <Wrapper
+            className="col-span-2 lg:row-span-10 row-span-8"
+            animation={true}
+            delay={0.3}
+          >
+            <Chat sendMessageToChat={sendMessage} />
+          </Wrapper>
+          <Wrapper
+            className="col-span-2 row-span-4"
+            animation={true}
+            delay={0.4}
+          >
+            <BaseData />
+          </Wrapper>
+          <Wrapper
+            className="col-span-2 row-span-4"
+            animation={true}
+            delay={0.4}
+          >
+            <MarsStats />
+          </Wrapper>
         </div>
+        <div className="lg:hidden flex flex-col gap-6 w-full h-[150vh] mt-32 mb-8 px-4 overflow-y-auto">
+          <Wrapper className="w-full !h-[600px] overflow-hidden" animation={true} delay={0.2}>
+            <MapWrapper />
+          </Wrapper>
+          <Wrapper className="w-full" animation={true} delay={0.3}>
+            <Chat sendMessageToChat={sendMessage} />
+          </Wrapper>
+          <Wrapper className="w-full !h-64" animation={true} delay={0.4}>
+            <BaseData />
+          </Wrapper>
+          <Wrapper className="w-full !h-48" animation={true} delay={0.4}>
+            <MarsStats />
+          </Wrapper>
+        </div>
+      </div>
     );
 }

@@ -20,32 +20,25 @@ export default function MarsStats(): JSX.Element {
 
   return (
     <div className="flex w-full h-full flex-col items-center justify-center">
-      <p className="text-center font-poppins font-bold text-xl mb-8">Dane Marsa</p>
+      <p className="text-center font-poppins font-bold text-xl mb-8">
+        Dane Marsa
+      </p>
       <Chart
         chartType="Gauge"
         data={[
           ["Temperatura", "Ciśnienie", "Wiatr"],
           [currentData?.temp_avg, currentData?.pressure, currentData?.wind],
         ]}
-        className="w-full h-full"
+        className="w-full"
         legendToggle={false}
         options={{
-          gauge: {
-            min: 0,
-            max: 100,
-            label: {
-              format: function (value: any) {
-                return value + "°";
-              },
-              show: true,
-            },
-            color: {
-              pattern: ["#FF0000", "#FFFF00", "#00FF00"],
-              threshold: {
-                values: [30, 70],
-              },
-            },
-          },
+          width: 300,
+          height: 120,
+          redFrom: 90,
+          redTo: 100,
+          yellowFrom: 75,
+          yellowTo: 90,
+          minorTicks: 5,
         }}
       />
     </div>

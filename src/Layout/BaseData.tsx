@@ -60,7 +60,7 @@ export default function BaseData(): JSX.Element {
       <img
         src={mars_gif}
         alt="mars_gif"
-        className="w-16 absolute right-12 bottom-12 -z-10 img-hor-vert"
+        className="w-16 absolute md:right-12 md:bottom-12 right-4 bottom-4 -z-10 img-hor-vert"
       />
     </div>
   );
