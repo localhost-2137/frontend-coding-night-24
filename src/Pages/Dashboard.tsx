@@ -17,7 +17,7 @@ export default function Dashboard(): JSX.Element {
     const setMessages = useSetAtom(chatMessagesAtom);
     const [alert, setAlert] = useAtom(alertAtom)
     const audioRef = useRef<HTMLAudioElement>(null);
-    const WS_URL = "ws://localhost:3000/ws";
+    const WS_URL = `ws://${window.location.hostname}/ws`;
 
     const ws = useRef<WebSocket | null>(null);
 

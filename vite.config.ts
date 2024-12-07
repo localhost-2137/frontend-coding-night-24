@@ -12,27 +12,15 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-    server: {
-      proxy: {
-        "/api": {
-          target: env.VITE_API_REAL_URL,
-          changeOrigin: true,
-          secure: false,
-          rewrite: (p) => p.replace(/^\/api/, ""),
-        },
-      },
-      cors: false,
-    },
-    preview: {
-      proxy: {
-        "/api": {
-          target: env.VITE_API_REAL_URL,
-          changeOrigin: true,
-          secure: false,
-          rewrite: (p) => p.replace(/^\/api/, ""),
-        },
-      },
-      cors: false,
+        server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, ''),
+                ws: true,
+            }
+        }
     },
   };
 });
