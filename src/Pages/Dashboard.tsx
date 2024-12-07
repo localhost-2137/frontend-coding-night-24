@@ -66,6 +66,17 @@ export default function Dashboard(): JSX.Element {
                     },
                 ]);
             }
+            if (data.type === "info") {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        id: Math.random(),
+                        content: data.value,
+                        sender: "bot",
+                        type: "info",
+                    },
+                ]);
+            }
         };
 
         return () => {
