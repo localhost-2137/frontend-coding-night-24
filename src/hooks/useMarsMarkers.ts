@@ -1,6 +1,9 @@
 import {useQuery} from "@tanstack/react-query";
 import getMarsMarkers from "@/lib/nasa/getMarsMarkers.ts";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {mapAtom} from "@/atoms/mapAtom";
+import {useAtom} from "jotai";
+import getMapPoints from "@/lib/api/getMapPoints.ts";
 
 export interface IMarker {
     position: [number, number];
@@ -9,10 +12,16 @@ export interface IMarker {
 }
 
 export default function useMarsMarkers() {
-    const [markers, setMarkers] = useState<IMarker[]>([]);
+    const [mapConfig, setMapConfig] = useAtom(mapAtom)
+
     const {data, status} = useQuery({
         queryKey: ["marsMarkers"],
         queryFn: getMarsMarkers
+    })
+
+    const {data: mapPoints, status: mapPointsStatus} = useQuery({
+        queryKey: ["customMarkers"],
+        queryFn: getMapPoints
     })
 
     useEffect(() => {
@@ -35,7 +44,9 @@ export default function useMarsMarkers() {
                         "Sol": feature.properties.sol,
                         "Przejechany dystans": feature.properties.dist_m + "m",
                     }));
-                    setMarkers(newMarkers);
+                    setMapConfig(prev => {
+                        return {...prev, markers: [...prev.markers, ...newMarkers]}
+                    })
                 });
 
             fetch(helicopterPosition.url).then(response => response.json()).then(data => {
@@ -52,10 +63,32 @@ export default function useMarsMarkers() {
                     "Czas trwania lotu w sekundach": feature.properties.Duration_s + "s",
                     "Data lotu": feature.properties.Earth_Date,
                 }))
-                setMarkers(prev => [...prev, ...newMarkers]);
+                setMapConfig(prev => {
+                    return {...prev, markers: [...prev.markers, ...newMarkers]}
+                })
             });
         }
     }, [status, data]);
 
-    return {markers}
+    useEffect(() => {
+        if (mapPointsStatus === "success") {
+            const points: IMarker[] = mapPoints.data.points.map((point: {
+                id: number
+                label: string
+                latitude: number
+                longitude: number
+            }) => {
+                return {
+                    position: [point.latitude, point.longitude],
+                    "Notatka": point.label,
+                }
+            })
+
+            setMapConfig(prev => {
+                return {...prev, markers: [...prev.markers, ...points]}
+            })
+        }
+    }, [mapPoints, mapPointsStatus]);
+
+    return {markers: mapConfig.markers}
 }

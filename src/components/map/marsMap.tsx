@@ -2,6 +2,9 @@ import {MapContainer, TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMarsMarkers from "@/hooks/useMarsMarkers.ts";
 import MarkerWithPopup from "@/components/map/markerWithPopup.tsx";
+import MapActionWrapper from "@/components/map/mapActionWrapper.tsx";
+import MapClickHandler from "@/components/map/mapClickHandler.tsx";
+import AddPointDialog from "@/components/map/addPointDialog.tsx";
 
 const MarsMap = () => {
     const wmtsBaseUrl = "https://api.nasa.gov/mars-wmts/catalog";
@@ -24,7 +27,10 @@ const MarsMap = () => {
             maxZoom={10}
             maxBounds={bounds}
             maxBoundsViscosity={1.0}
-            className="w-full h-full">
+            className="w-full h-full relative">
+            <MapActionWrapper/>
+            <MapClickHandler/>
+            <AddPointDialog/>
             <TileLayer
                 url={tileUrlTemplate}
                 bounds={bounds}
